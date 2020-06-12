@@ -3,7 +3,14 @@ from decimal import *
 import random
 from math import log
 
-# Example of simple KeyExchange key exchange algorithm
+"""
+Example Diffie-Hellman key exchange class in Python
+This relies on the difficulty of factoring the discrete logarithm. That is, it is difficult to solve for x in this equation:
+ax mod p
+particularly when p, a and x are large.
+
+https://github.com/r0fls/Diffie-Hellman/
+"""
 
 getcontext().prec = 100000
 

@@ -1,25 +1,26 @@
-# twofish implimentation
-import math
+
+"""
+https://github.com/bauhuasbadguy/Twofish_encryption
+
+twofish implimentation
+multiply 2 2d matricies together
+I could'nt be buggered adding exceptions so
+make sure your matricies are valid if for some
+insane reason you decide to take the code for the
+GF field matrix multiplications
+
+This is the second encryption code I wrote.Better than blowfish but
+still not great. I can't remember if I fixed the problems with special
+characters in the cypher text in here. There may also be problems with
+spliting stuff into blocks. Buyer beware.
 
 
-# multiply 2 2d matricies together
-# I could'nt be buggered adding exceptions so
-# make sure your matricies are valid if for some
-# insane reason you decide to take the code for the
-# GF field matrix multiplications
+example use of the function for matrix multiplication
+in my notation a matrix is a list of lists. Each secondary list
+is a row
 
-# This is the second encryption code I wrote.Better than blowfish but
-# still not great. I can't remember if I fixed the problems with special
-# characters in the cypher text in here. There may also be problems with
-# spliting stuff into blocks. Buyer beware.
-
-
-# example use of the function for matrix multiplication
-# in my notation a matrix is a list of lists. Each secondary list
-# is a row
-
-# This is written for python 3
-
+This is written for python 3
+"""
 ##########################
 ## Mathmatics functions ##
 ##########################
