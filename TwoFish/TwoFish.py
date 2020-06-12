@@ -882,8 +882,3 @@ def decrypt_message(message, S, K, rounds=16):
 
     return C
 
-
-######################
-## End of functions ##
-######################
-
