@@ -1,9 +1,6 @@
-import sys
-
-from KeyExchange.DiffieHellman import DH_KeyExchange
-from Signature.signature import sign, verify
-from TwoFish import TwoFish
-import uuid
+import TwoFish
+from DiffieHellman import DH_KeyExchange
+from signature import sign, verify
 
 
 def save_customers_data(data: str):

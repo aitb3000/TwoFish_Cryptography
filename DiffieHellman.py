@@ -64,13 +64,13 @@ if __name__ == "__main__":
     import base64
 
     alice = DH_KeyExchange()
-    with open("aliceprivate.pem", 'w') as f:
+    with open("KeyExchange/aliceprivate.pem", 'w') as f:
         f.write(str(base64.b64encode((str(alice.secret)).encode("utf-8"))))
 
     print("alice's public key':", str(base64.b64encode((str(alice.secret)).encode("utf-8"))))
 
     bob = DH_KeyExchange()
-    with open("bobprivate.pem", 'w') as f:
+    with open("KeyExchange/bobprivate.pem", 'w') as f:
         f.write(str(base64.b64encode((str(bob.secret)).encode('utf-8'))))
 
     print("bob's public key':", str(base64.b64encode((str(bob.secret)).encode('utf-8'))))
