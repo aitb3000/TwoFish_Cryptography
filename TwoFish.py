@@ -1,6 +1,5 @@
 
 """
-https://github.com/bauhuasbadguy/Twofish_encryption
 
 twofish implimentation
 multiply 2 2d matricies together
@@ -25,6 +24,7 @@ This is written for python 3
 ## Mathmatics functions ##
 ##########################
 
+import sys
 
 # Multiplication in the GF(256) field
 def GF256multiply(A, B):
@@ -506,6 +506,12 @@ def q1(X):
 
 
 def find_M_vectors(Key, N):
+    """
+    The Key Schedule:
+    :param Key:
+    :param N:
+    :return:
+    """
     # find the binary key to see what we should pad to
     bin_key = bin(Key)
     bin_key = bin_key[2:]
@@ -629,7 +635,7 @@ def find_S_vector(mk):
 
 
 def gen_keys(key, N=128, rounds=16):
-    # these are the 3 versions of twofish, with key lengths of 128 bits, 192 bits and 256 bits
+    # these are the 3 versions of TwoFish, with key lengths of 128 bits, 192 bits and 256 bits
     key_lengths = [128, 192, 256]
 
     if N not in key_lengths:
@@ -647,15 +653,8 @@ def gen_keys(key, N=128, rounds=16):
     # calculate the M vectors
     [mk, Mo, Me, Mi] = find_M_vectors(m, N)
 
-    # find the s-boxes
-    # bin_key = bin(m)
-    # bin_key = bin_key[2:]
-    # paded_key = pad_number(m,128)
-
-    #
     S = find_S_vector(mk)
 
-    #
     K = generate_K(Me, Mo, rounds)
 
     return [K, S]

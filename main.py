@@ -1,3 +1,6 @@
+import json
+from typing import Optional
+
 import TwoFish
 from DiffieHellman import DH_KeyExchange
 from signature import sign, verify
@@ -9,8 +12,13 @@ def save_customers_data(data: str):
     :param data:
     :return:
     """
-    with open("customer_data.data", 'w') as f:
-        f.write(data)
+    with open("data_file.data", "w") as write_file:
+        json.dump(data, write_file)
+
+
+def load_encrypt_file(data_location: Optional[str]):
+    if data_location is not None:
+        return json.load(data_location)
 
 
 if __name__ == '__main__':
@@ -44,14 +52,15 @@ if __name__ == '__main__':
     # K to encrpy the Message
     alice_key = alice.peers.values()
     bob_key = bob.peers.values()
-    # alice_key = str(base64.b64encode((str(alice.public)).encode("utf-8")))
-    # bob_key = str(base64.b64encode((str(alice.public)).encode("utf-8")))
 
-    message = 'Hello World'
+    message = "Hello World"
+
     print("Message: {}".format(message))
 
     # Set the key length
+    # 128, 196 or 256
     N = 256
+    # Default rounds is 16 rounds as the TwoFish paper define to us.
     rounds = 16
 
     # Generate Key and ... - TwoFish

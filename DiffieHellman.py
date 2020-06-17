@@ -1,17 +1,15 @@
-import os
 from decimal import *
 import random
-from math import log
+import base64
 
 """
 Example Diffie-Hellman key exchange class in Python
 This relies on the difficulty of factoring the discrete logarithm. That is, it is difficult to solve for x in this equation:
 ax mod p
 particularly when p, a and x are large.
-
-https://github.com/r0fls/Diffie-Hellman/
 """
 
+# The precision
 getcontext().prec = 100000
 
 
@@ -23,20 +21,20 @@ class DH_KeyExchange:
         self.base = g
         self.public = A or B
         """
-        self.n = Decimal(
+        self.P = Decimal(
             '1340185579782030309029142285845485748073406778702270938755484147318382420338087834406828955714187005654640257038495796545155402280055987076251704557994637589726712709889312042801858044039590155407650471667907995888292123909278046563998441725881316702608454953284969473141146885140822683049274853701491')
-        self.base = Decimal(
+        self.g = Decimal(
             '14759984361802021245410475928101669395348791811705709117374129427051861355011151') * Decimal(
-            '5915587277') % self.n
+            '5915587277') % self.P
 
         # Secret is the private key.
-        self.secret = Decimal(random.randrange(11, self.base))
-        self.public = modpow(self.base, self.secret, self.n)
+        self.secret = Decimal(random.randrange(11, self.g))
+        self.public = modpow(self.g, self.secret, self.P)
         self.peers = dict()
 
     def new_secret(self):
-        self.secret = Decimal(random.randrange(11, self.base))
-        self.public = modpow(self.base, self.secret, self.n)
+        self.secret = Decimal(random.randrange(11, self.g))
+        self.public = modpow(self.g, self.secret, self.P)
 
     def new_peer(self, peer_public):
         """
@@ -44,10 +42,19 @@ class DH_KeyExchange:
         :param peer_public:
         :return:
         """
-        self.peers[peer_public] = modpow(peer_public, self.secret, self.n)
+        self.peers[peer_public] = modpow(peer_public, self.secret, self.P)
 
 
 def modpow(b, e, m):
+    """
+    Calculate A or B (on the picture)
+    or
+    Calculate K
+    :param b:
+    :param e:
+    :param m:
+    :return:
+    """
     if m == 1:
         return 0
     result = 1
@@ -77,4 +84,3 @@ if __name__ == "__main__":
     bob.new_peer(alice.public)
     alice.new_peer(bob.public)
     print(alice.peers.values(), "\n", bob.peers.values())
-
